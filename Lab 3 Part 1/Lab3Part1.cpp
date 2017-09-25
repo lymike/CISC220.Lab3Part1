@@ -8,8 +8,8 @@
 /*
  * Michael Ly
  * TA: Eeshita Biswas
- * 9/22/17
- * Lab 2
+ * 9/20/17
+ * Lab 3
  * This file contains functions for Lab 3 Part 1.
  */
 
@@ -20,13 +20,56 @@ using namespace std;
 
 // Function Declarations
 int* createArray1(int* len, int* lo, int* hi);
-int* createArray2(int* len, int* lo, int* hi);
-void arrHelper(int arr[], int len, int lo, int hi);
-void printArray(int arr[], int len);
-int hanningWin(int arr[]);
-int* filterArray(int arr[], int len);
-void graphArray(int arr[], int len, int lo, int hi);
+/* Returns a dynamic array on the memory heap, released from the memory after function is
+ * being called.
+ * Arguments: *len: the size of the array being created, passed by pointer. Randomly
+ *                  generated within the function.
+ * 			  *lo: the lowest value within the array, passed by pointer. Randomly
+ * 			       generated within the function.
+ * 			  *hi: the highest value within the array, passed by pointer. Randomly
+ * 			       generated within the function.
+ */
 
+int* createArray2(int* len, int* lo, int* hi);
+/* Returns a dynamic array on the memory heap, released from the memory after function is
+ * being called. (Using recursion)
+ * Arguments: *len: the size of the array being created, passed by pointer. Randomly
+ *                  generated within the function.
+ * 			  *lo: the lowest value within the array, passed by pointer. Randomly
+ * 			       generated within the function.
+ * 			  *hi: the highest value within the array, passed by pointer. Randomly
+ * 			       generated within the function.
+ */
+
+void arrHelper(int arr[], int len, int lo, int hi);
+// Helper function for the createArray2 function.
+
+void printArray(int arr[], int len);
+/* Prints out the array being passed in.
+ * Arguments: arr[]: array as an input.
+ *           len: the size of the array.
+ */
+
+int hanningWin(int arr[]);
+/* Returns the average value of the hanning window being passed in (an array with a size of 5).
+ * Argument: arr[]: array as an input with a size of 5.
+ */
+
+int* filterArray(int arr[], int len);
+/* Returns a filtered hanning window array.
+ * Arguments: arr[]: array as an input.
+ *            len: the size of the array.
+ */
+
+void graphArray(int arr[], int len, int lo, int hi);
+/* Prints out a graph of stars positioned to the corresponding integers within the input array.
+ * Arguments: arr[]: array as an input.
+ *            len: the size of the array.
+ *            lo: lowest value of the given array.
+ *            hi: highest value of the given array.
+ */
+
+// Test Cases & Testing Variables and Arrays
 int main() {
 
 	cout << "Problem 1" << endl;
@@ -126,15 +169,15 @@ int main() {
 	cout << "Problem 6" << endl;
 	cout << "Test 1: " << endl;
 	int garr1[] = {6, -2, -4, 5, -3, -4, -3, -1, 5, 2, -2, 0, -7, 2, -3, -4, -3, -1, -5, -3, 1, 7, 3, -7, -7, 3, -8, 1, -5, -4, -2, -5, -8, 0, -4};
-	graphArray(garr1, 35, -8, 7);
+	graphArray(garr1, 35, -8, 7); // Expected a graph of the array same as the one in the lab.
 	cout << endl;
 	cout << "Test 2: " << endl;
 	int* garr2 = filterArray(garr1, 35);
-	graphArray(garr2, 35, -4, 2); // Expected
+	graphArray(garr2, 35, -4, 2); // Expected a graph of the filtered version of the array above.
 	cout << endl;
 	cout << "Test 3: " << endl;
 	int garr3[] = {1, 2, 3, 4, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0};
-	graphArray(garr3, 30, -5, 5); // Expected a wave to be printed out.
+	graphArray(garr3, 30, -5, 5); // Expected a graph of wave to be printed out.
 
 	return 0;
 }
@@ -163,7 +206,7 @@ void arrHelper(int arr[], int len, int lo, int hi) {
 
 int* createArray2(int* len, int* lo, int* hi) {
 	*len = rand()%25 + 25;
-	*hi = rand()%25 + 5;
+	*hi = rand()%5 + 5;
 	*lo = -1 * (rand()%5 + 5);
 	int* arr = new int[*len];
 	arrHelper(arr, *len, *lo, *hi);
